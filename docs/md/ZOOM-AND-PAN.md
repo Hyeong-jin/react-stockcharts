@@ -1,11 +1,20 @@
 
-## <span style="color:steelblue">Click on the chart to focus it, and then zoom by mouse scroll, pan by dragging the chart</span>
-
-checkout the [source](https://gist.github.com/rrag/a8465abe0061df1b7976), [block](http://bl.ocks.org/rrag/a8465abe0061df1b7976), [plunker](http://plnkr.co/edit/gist:a8465abe0061df1b7976?p=preview) of this example
+[source](https://github.com/rrag/react-stockcharts/blob/master/docs/lib/charts/CandleStickChartWithZoomPan.js), [codesandbox](https://codesandbox.io/s/github/rrag/react-stockcharts-examples2/tree/master/examples/CandleStickChartWithZoomPan)
 
 
-The only change is enabling `zoom` and `pan`
+Click and drag the axis, to zoom on y & x. Once y axis is zoomed you can pan the chart on both x & y axis. Reset the y axis domain with the "Reset y domain" button
+
+`mousemove`, `pan` and `zoom` are enabled by default. To disable them you can use `mouseMoveEvent`, `panEvent` and `zoomEvent` props.
+
+`clamp` prevents scrolling past the last data point, and is disabled by default. Supported values for clamp are `left`, `right`, or `both` for clamping one or both sides of the graph.
+
 ```jsx
-<EventCapture mouseMove={true} zoom={true} pan={true} mainChart={1} defaultFocus={false} />
+<ChartCanvas
+    ...
+    mouseMoveEvent={true}
+    panEvent={true}
+    zoomEvent={true}
+    clamp={false}
+    ...
+/>
 ```
-other than enabling `zoom` and `pan`, `defaultFocus` of `true` means mouse scroll over the chart, triggers zoom action if zoom is enabled. If `defaultFocus` is `false`, you have to click on the chart to get focus and then all scroll events are zoom events if `zoom` is enabled

@@ -1,12 +1,5 @@
 
-import TypeChooser from "./TypeChooser";
-import ChartWidthMixin from "./ChartWidthMixin";
-import SaveChartAsImage from "./SaveChartAsImage";
-import fitWidth from "./fitWidth";
-
-export default {
-	TypeChooser,
-	ChartWidthMixin,
-	SaveChartAsImage,
-	fitWidth,
-};
+export { default as TypeChooser } from "./TypeChooser";
+export { default as SaveChartAsImage } from "./SaveChartAsImage";
+export { default as fitWidth } from "./fitWidth";
+export { default as fitDimensions } from "./fitDimensions";

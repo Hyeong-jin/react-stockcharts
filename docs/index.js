@@ -1,28 +1,44 @@
-'use strict';
+import { tsvParse } from  "d3-dsv";
+import { timeParse } from "d3-time-format";
 
-var React = require('react');
-// var ReactDOM = require('react-dom');
-var d3 = require('d3');
+import React from "react";
+import ReactDOM from "react-dom";
 
-require('stylesheets/re-stock');
+import Chart from "./lib/charts/CandleStickChartWithDarkTheme";
+// import Chart from "./lib/charts/OHLCChartWithElderRayIndicator";
 
-var ReadME = require('md/MAIN.md');
+const ReadME = require("md/MAIN.md");
+
+require("stylesheets/re-stock");
 
 document.getElementById("content").innerHTML = ReadME;
 
-var parseDate = d3.time.format("%Y-%m-%d").parse
-d3.tsv("data/MSFT.tsv", function(err, data) {
-	data.forEach((d, i) => {
-		d.date = new Date(parseDate(d.date).getTime());
-		d.open = +d.open;
-		d.high = +d.high;
-		d.low = +d.low;
-		d.close = +d.close;
-		d.volume = +d.volume;
-		// console.log(d);
+const parseDate = timeParse("%Y-%m-%d");
+
+if (!window.Modernizr.fetch || !window.Modernizr.promises) {
+	require.ensure(["whatwg-fetch", "es6-promise"], function(require) {
+		require("es6-promise");
+		require("whatwg-fetch");
+		loadPage();
 	});
+} else {
+	loadPage();
+}
 
-	var Chart = require('lib/charts/CandleStickChartWithMACDIndicator');
+function loadPage() {
+	fetch("data/MSFT.tsv")
+		.then(response => response.text())
+		.then(data => tsvParse(data, d => {
+			d.date = new Date(parseDate(d.date).getTime());
+			d.open = +d.open;
+			d.high = +d.high;
+			d.low = +d.low;
+			d.close = +d.close;
+			d.volume = +d.volume;
 
-	React.render(<Chart data={data} type="hybrid"/>, document.getElementById("chart"));
-});
+			return d;
+		}))
+		.then(data => {
+			ReactDOM.render(<Chart data={data} type="hybrid"/>, document.getElementById("chart"));
+		});
+}

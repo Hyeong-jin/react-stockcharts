@@ -1,15 +1,13 @@
-```jsx
-<TrendLine id={0} enabled={true} snap={true} snapTo={d => [d.open, d.high, d.low, d.close]} />
-```
+- create a line - click, mousemove, click
+	- by default the line edge snaps to the nearest high or low, press Shift when you click to disable snap temporarily
+- Once a line is drawn it gets out of draw mode automatically. To get back into draw mode again - Press D
+- Delete the last drawn line - Press DEL
+- Get out of draw mode - Press ESC
+- When not in draw mode
+	- hover and click to select
+	- move the line or edges
+	- click outside to unselect
 
-inside a `Chart` creates an interactive trendline for that `Chart`
 
-other props of interest
+[source](https://github.com/rrag/react-stockcharts/blob/master/docs/lib/charts/CandleStickChartWithInteractiveIndicator.js), [codesandbox](https://codesandbox.io/s/github/rrag/react-stockcharts-examples2/tree/master/examples/CandleStickChartWithInteractiveIndicator)
 
-`shouldDisableSnap` defaults to `(e) => (e.button === 2 || e.shiftKey)` -- mouse right click **or** holding the shift key while click -- 
-to temporarily disable snap (if it is enabled already)
-
-`shouldRemoveLastIndicator` defaults to `(e) => (e.button === 2 && e.ctrlKey)` -- mouse right click **and** holding the ctrl key while click --
-to remove the last drawn indicator
-
-These defaults can be changed to your convenience

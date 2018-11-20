@@ -1,4 +1,4 @@
-"use strict";
+
 
 import React from "react";
 import shallowEqual from "./shallowEqual";
@@ -11,4 +11,4 @@ class PureComponent extends React.Component {
 	}
 }
 
-module.exports = PureComponent;
+export default PureComponent;

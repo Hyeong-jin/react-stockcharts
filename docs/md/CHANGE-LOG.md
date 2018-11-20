@@ -1,3 +1,211 @@
+## v0.7.0
+Details available in https://github.com/rrag/react-stockcharts/issues/206
+
+
+## v0.6.1
+
+#### New features
+
+1. Weighted Moving Average indicator PR [#200](https://github.com/rrag/react-stockcharts/pull/200)- Thank you [@mgeri](https://github.com/mgeri)
+1. Triangular Moving Average indicator PR [#204](https://github.com/rrag/react-stockcharts/pull/204)- Thank you [@mgeri](https://github.com/mgeri)
+1. SAR indicator
+
+#### Bug fixes
+
+1. [#196](https://github.com/rrag/react-stockcharts/issues/196) - Add `clip` property (default = true) to `BarSeries`, `CandlestickSeries`, `ElderRaySeries`, `MACDSeries`, `OHLCSeries`, `OverlayBarSeries`, `PointAndFigureSeries`, `RenkoSeries`, `StackedBarSeries`
+1. [#203](https://github.com/rrag/react-stockcharts/issues/203) - Filter out bars which have invalid y values
+
+
+## v0.6.0
+
+#### Breaking Changes
+
+1. `EventCapture` is now removed. This is because starting `0.6` zoom actions can happen by drag on the x/y axis also, and that is a separate container, so having a single `EventCapture` is not possible
+1. `CurrentCoordinate`, `MouseCoordinateX`, `MouseCoordinateY` no longer require an `id` prop
+1. `TooltipContainer` is removed and all the tooltips (`OHLCTooltip`, `MovingAverageTooltip`)  are now moved inside the `Chart` relative to which you specify the origin. This also makes the `forChart` prop on the different `XXXTooltip` unnecessary
+1. `ElderRaySeries` no longer accepts a `calculator` prop but instead an `accessor`
+
+#### New features
+
+1. Zoom on y
+1. Pan on y
+1. Support for pan to load more data
+1. Click, Right click, Doubleclick handlers on `LineSeries` - This can serve as a model for other series
+1. Add `tickStrokeDasharray` - [#183](https://github.com/rrag/react-stockcharts/pull/183) and [documentation](http://rrag.github.io/react-stockcharts/documentation.html#/line_scatter)
+1. Control the number of datapoints/px - [#192](https://github.com/rrag/react-stockcharts/pull/192)
+1. Hovertooltip now autosizes based on the content - [#189](https://github.com/rrag/react-stockcharts/pull/189)
+1. Smooth zoom - [#160](https://github.com/rrag/react-stockcharts/pull/160)
+1. More markers for a scatter chart - [#172](https://github.com/rrag/react-stockcharts/pull/172)
+
+#### Contributors
+Please welcome [@shprink](https://github.com/shprink) as a new contributor.
+
+#### Internal Changes
+
+1. Upgrade to `d3` individual modules
+
+## v0.5.0
+
+#### Breaking Changes
+
+1. Removed `financeEODDiscontinuousScale` and replaced by a new discontinuous scale which supports both eod and intraday - Thank you [@brobits](https://github.com/brobits)
+    
+    in `0.4`
+
+        <ChartCanvas ...
+            discontinous xScale={financeEODDiscontinuousScale()}
+            ...>
+
+    in `0.5`
+
+        <ChartCanvas ...
+            xScaleProvider={discontinuousTimeScaleProvider}
+            ...>
+
+    `discontinous` prop is also removed. However should you choose to use any of the scales provided by d3, you can use them without any changes from `0.4`
+
+    in `0.4`
+
+        <ChartCanvas ...
+            xScale={d3.time.scale()}
+            ...>
+
+    in `0.5`
+
+        <ChartCanvas ...
+            xScale={d3.time.scale()}
+            ...>
+
+    no changes here when using an existing d3 scale, `xScaleProvider` is useful only when you have to work with a discontinuous scale
+
+1. Removed `MouseCoordinates`, use `MouseCoordinateX`, `MouseCoordinateY` and `CrossHairCursor` together to get similar results. Breaking out one component into multiple gave a lot more flexibility and also helps in removing the awkward props `yMousePointerDisplayLocation`, `yMousePointerDisplayFormat` from `Chart`
+1. Removed `yMousePointerDisplayLocation`, `yMousePointerDisplayFormat` from `Chart`, Use `MouseCoordinateY` instead
+1. Interactive indicators are `svg` only. This is most likely a transitional change till they get rewritten again in a future version to support canvas, be on the lookout for another possibly breaking change on interactive indicators
+
+    Interactive indicators are no longer placed inside a `Chart`, they live inside `EventCapture`. Placing them on top of the event capture `rect` has helped in making [#94](https://github.com/rrag/react-stockcharts/issues/94) possible
+
+    in `0.4`
+
+        <ChartCanvas ...>
+            <Chart id={0} ...>
+                ...
+                <TrendLine ... />
+                ...
+            </Chart>
+            ...
+            <EventCapture ... />
+            ...
+        </ChartCanvas>
+
+    in `0.5`
+
+        <ChartCanvas ...>
+            <Chart id={0} ...>
+                ...
+            </Chart>
+            ...
+            <EventCapture ... >
+                <TrendLine forChart={0} ... />
+            </EventCapture>
+            ...
+        </ChartCanvas>
+
+    look for more details in the [documentation](#/trendline) page
+
+
+#### New features
+
+1. Support both React `0.14` and React `15`
+1. Annotations for events [#54](https://github.com/rrag/react-stockcharts/issues/54) - [more details](#/annotations)
+1. Buy & sell signals using Annotation - [more](#/ma_crossover_using_text_annotation) [details](#/ma_crossover_using_svg_shape)
+1. Labels - Look at how Chart title and axis labels [more details](#/annotations)
+1. Hover tooltip - [more details](#/hover_tooltip)
+1. intraday scale - [more details](#/intra_day_with_discontinuous_scale)
+1. Better edge coordinate - [#79](https://github.com/rrag/react-stockcharts/pull/79) - Thank you [@cesardeazevedo](https://github.com/cesardeazevedo) - 
+1. Volume profile - Refer to documentation for [volume profile](#/volume_profile) and [volume profile by session](#/volume_profile_by_session) Thank you [@aajtodd](https://github.com/aajtodd) for great documentation references
+
+#### Contributors
+
+I thank all the contributors for taking your time to help make this better
+
+1. [@akinoniku](https://github.com/akinoniku) for [#88](https://github.com/rrag/react-stockcharts/pull/88)
+1. [@brobits](https://github.com/brobits) for [#69](https://github.com/rrag/react-stockcharts/pull/69)
+1. [@cesardeazevedo](https://github.com/cesardeazevedo) for [#79](https://github.com/rrag/react-stockcharts/pull/79), [#97](https://github.com/rrag/react-stockcharts/pull/97)
+
+Special thanks to
+[@rsklyar](https://github.com/rsklyar)
+[@iNikNik](https://github.com/iNikNik)
+[@Pinxie](https://github.com/Pinxie)
+[@WaiSiuKei](https://github.com/WaiSiuKei)
+[@itsjimbo](https://github.com/itsjimbo)
+[@cesardeazevedo](https://github.com/cesardeazevedo)
+[@aajtodd](https://github.com/aajtodd)
+[@XmelesX](https://github.com/XmelesX)
+[@raptoria](https://github.com/raptoria)
+for your constant support, providing ideas for new features, suggestions for improvement and identifying defects
+
+
+## v0.4.0
+
+#### Breaking Changes
+
+1. Drop support for React `0.13.x` and make `0.14.3` the default dependency
+1. Major changes to API.
+    - `DataSeries` is gone
+    - all `indicator`s and `dataTransform`s are now gone, and are replaced by `calculator`
+    - `setViewRange`, `pushData`, `alterData` were methods you could invoke from the ref of `ChartCanvas`. These are now gone, in favor of react style props for setting them
+    - `ChartCanvas` now takes (among other things)
+        - `xExtents` - indicates the domain of the x axis
+        - `calculators` - indicates the calculators to be calculated on the data
+
+    For a summary of changes, refer to [this issue](https://github.com/rrag/react-stockcharts/issues/48#issuecomment-174184639). Compare the examples [before (`0.3`)](https://github.com/rrag/react-stockcharts/tree/2af0c6e763ae960d40eb6c5406b4fe0ec8da2ac2/docs/lib/charts) and [after(`0.4`](https://github.com/rrag/react-stockcharts/tree/8386c424821907512b8e135a8a7fded3e5e09c83/docs/lib/charts)
+
+1. All the `calculator`s, are written d3 style. (inspired by [d3fc](https://github.com/ScottLogic/d3fc))
+1. `CompareSeries` is gone in favor of a calculator in its place. Refer to the examples for usage
+
+#### New Features
+
+1. Implement touch support, pan and pinch zoom
+1. New Chart types Scatter, OHLC
+1. New indicators - Elder impulse, Elder Ray, Force Index, ATR
+1. Updated `TrendLine`, `FibonacciRetracement`, `Brush` to take `type` prop
+1. Change `StraightLine` to take a prop of type which defaults to `horizontal`
+
+#### Internal Changes
+
+1. Inspired by [d3fc](https://github.com/ScottLogic/d3fc) change some of the internals
+1. add dependency `lodash.fattendeep`
+1. remove dependency `object-assign`
+
+## v0.3.1
+
+#### Changes
+
+1. Fix [#39](https://github.com/rrag/react-stockcharts/issues/39)
+1. Add eslint rules to prevent these from happening again
+1. Change `utils.js` and `ChartDataUtil.js` to use es6 exports
+1. fix `svg` for `Brush`
+
+## v0.3.0
+
+#### Breaking Changes
+
+1. Changes to `Histogram` to accept `stroke` as a boolean param instead of a function. the `stroke` color cannot be different from `fill`
+1. `OHLCTooltip` uses `d3.format(".4s")` as the format to show volume. This shows a suffix of M (Mega) for Million and G (Giga) for Billion. These are per the [SI-prefix](https://en.wikipedia.org/wiki/Metric_prefix). You can change it to a different format by passing a prop `volumeFormat` that accepts a function taking the volume and returning a formatted string
+
+#### Changes
+
+1. Add new methods to `ChartCanvas`
+1. Add `Brush` and `ClickCallback` interactive components
+1. Fix bug on zoom, for charts not using stockscale
+1. Change to use ES6 module exports instead of commonjs `module.exports = ...`
+
+## v0.2.12
+
+#### Changes
+
+1. Fixed a bug where `React` was not imported in `fitWidth`
+
 ## v0.2.11
 
 #### Breaking Changes

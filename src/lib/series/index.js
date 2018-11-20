@@ -1,37 +1,24 @@
-import AreaSeries from "./AreaSeries";
-import LineSeries from "./LineSeries";
-import CompareSeries from "./CompareSeries";
-import CandlestickSeries from "./CandlestickSeries";
-import HistogramSeries from "./HistogramSeries";
-import KagiSeries from "./KagiSeries";
-import PointAndFigureSeries from "./PointAndFigureSeries";
-import RenkoSeries from "./RenkoSeries";
-import MACDSeries from "./MACDSeries";
-import BollingerSeries from "./BollingerSeries";
-import RSISeries from "./RSISeries";
-import StochasticSeries from "./StochasticSeries";
-
-import Area from "./Area";
-import Line from "./Line";
-import StraightLine from "./StraightLine";
-
-import wrap from "./wrap";
-
-export default {
-	AreaSeries,
-	LineSeries,
-	CompareSeries,
-	CandlestickSeries,
-	HistogramSeries,
-	KagiSeries,
-	PointAndFigureSeries,
-	RenkoSeries,
-	MACDSeries,
-	BollingerSeries,
-	RSISeries,
-	StochasticSeries,
-	Area,
-	Line,
-	StraightLine,
-	wrap,
-};
+export { default as AreaSeries } from "./AreaSeries";
+export { default as AlternatingFillAreaSeries } from "./AlternatingFillAreaSeries";
+export { default as AreaOnlySeries } from "./AreaOnlySeries";
+export { default as ScatterSeries } from "./ScatterSeries";
+export { default as CircleMarker } from "./CircleMarker";
+export { default as TriangleMarker } from "./TriangleMarker";
+export { default as SquareMarker } from "./SquareMarker";
+export { default as LineSeries } from "./LineSeries";
+export { default as CandlestickSeries } from "./CandlestickSeries";
+export { default as OHLCSeries } from "./OHLCSeries";
+export { default as BarSeries } from "./BarSeries";
+export { default as StackedBarSeries } from "./StackedBarSeries";
+export { default as GroupedBarSeries } from "./GroupedBarSeries";
+export { default as KagiSeries } from "./KagiSeries";
+export { default as PointAndFigureSeries } from "./PointAndFigureSeries";
+export { default as RenkoSeries } from "./RenkoSeries";
+export { default as MACDSeries } from "./MACDSeries";
+export { default as BollingerSeries } from "./BollingerSeries";
+export { default as RSISeries } from "./RSISeries";
+export { default as StochasticSeries } from "./StochasticSeries";
+export { default as ElderRaySeries } from "./ElderRaySeries";
+export { default as VolumeProfileSeries } from "./VolumeProfileSeries";
+export { default as StraightLine } from "./StraightLine";
+export { default as SARSeries } from "./SARSeries";

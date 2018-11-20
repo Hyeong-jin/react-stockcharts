@@ -1,43 +1,31 @@
-"use strict";
+
 
 // common components
-import ChartCanvas from "./lib/ChartCanvas";
-import Chart from "./lib/Chart";
-import DataSeries from "./lib/DataSeries";
-import BackgroundText from "./lib/BackgroundText";
+export { default as ChartCanvas } from "./lib/ChartCanvas";
+export { default as Chart } from "./lib/Chart";
+export { default as GenericChartComponent } from "./lib/GenericChartComponent";
+export { default as GenericComponent } from "./lib/GenericComponent";
+export { default as BackgroundText } from "./lib/BackgroundText";
+export { default as ZoomButtons } from "./lib/ZoomButtons";
 
-// interaction components
-import EventCapture from "./lib/EventCapture";
+export const version = "0.7.8";
 
+/*
 // chart types & Series
-import series from "./lib/series";
+import * as series from "./lib/series";
+import * as scale from "./lib/scale";
 
-import coordinates from "./lib/coordinates";
-import indicator from "./lib/indicator";
+import * as coordinates from "./lib/coordinates";
+import * as indicator from "./lib/indicator";
+import * as algorithm from "./lib/algorithm";
 
-import transforms from "./lib/transforms";
-import axes from "./lib/axes";
-import tooltip from "./lib/tooltip";
-import helper from "./lib/helper";
+import * as annotation from "./lib/annotation";
 
-import interactive from "./lib/interactive";
+import * as axes from "./lib/axes";
+import * as tooltip from "./lib/tooltip";
+import * as helper from "./lib/helper";
 
-const version = "0.2.12";
+import * as interactive from "./lib/interactive";
+import * as utils from "./lib/utils";
 
-export default {
-	ChartCanvas,
-	Chart,
-	DataSeries,
-	EventCapture,
-	BackgroundText,
-	series,
-	coordinates,
-	indicator,
-	transforms,
-	axes,
-	tooltip,
-	helper,
-	interactive,
-	version
-};
-
+*/
